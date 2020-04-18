@@ -1,0 +1,82 @@
+main: fr.dornacraft.justicehands.Main
+name: JusticeHands
+version: 0.3.0
+description: Gestions des outils de modérations et de sanctions
+api-version: 1.15
+load: STARTUP
+author: Glynix
+website: https://www.dornacraft.fr
+depend: [DevToolsLib]
+
+commands:
+  cr:
+    description: CriminalRecords (Casiers Judiciaires)
+    aliases: cj
+  sm:
+    description: SanctionManager (Générateur de sanction)
+    aliases: sanction
+  mt:
+    description: ModeratorTools (Outils de modération)
+    aliases: modtools
+    
+        
+permissions:
+  justicehands.pl:
+    description: Accès total au plugin JusticeHands.
+    children:
+      justicehands.cr: true
+      justicehands.mt: true
+      justicehands.sm: true
+      
+  justicehands.cr:
+    description: Accès complet sur les casiers judiciaires et édition de sanctions.  
+    children:
+      justicehands.cr.admin: true
+      justicehands.cr.mod: true
+      justicehands.cr.joueur: true
+      
+  justicehands.sm:
+    description: Accès complet sur l'attribution de sanction.
+    children:
+      justicehands.sm.use: true
+      justicehands.sm.kick: true
+      justicehands.sm.mute: true
+      justicehands.sm.ban: true
+      justicehands.sm.bandef: true
+      justicehands.sm.custom: true
+     
+  justicehands.cr.admin:
+    description: CriminalRecords - Accès Administrateur
+    children:
+      justicehands.cr.override: true
+      justicehands.cr.delete.kick: true
+      justicehands.cr.delete.mute: true
+      justicehands.cr.delete.risingban: true
+      justicehands.cr.delete.ban: true
+      justicehands.cr.delete.bandef: true
+      justicehands.cr.contestation.kick: true
+      justicehands.cr.contestation.mute: true
+      justicehands.cr.contestation.risingban: true
+      justicehands.cr.contestation.ban: true
+      justicehands.cr.contestation.bandef: true
+      justicehands.cr.visionall: true
+      justicehands.cr.mod: true
+      justicehands.cr.joueur: true
+      
+  justicehands.cr.mod:
+    description: CriminalRecords - Accès Modérateur
+    children:
+      justicehands.cr.immune: true
+      justicehands.cr.unmute: true
+      justicehands.cr.visionmedium: true
+      justicehands.cr.joueur: true
+  
+  justicehands.cr.joueur:
+    description: CriminalRecords - Accès Joueur
+    children:
+      justicehands.cr.getid: true
+      justicehands.cr.visionlow: true
+      justicehands.cr.open.other: true
+      justicehands.cr.open.yourself: true
+      justicehands.cr.use: true
+  
