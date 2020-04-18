@@ -19,6 +19,7 @@ import fr.dornacraft.justicehands.sanctionmanager.objects.Sanction;
 public class SqlSanctionManager {
 	private Connection connection;
 
+	// Constructeur
 	public SqlSanctionManager(Connection connection) {
 		this.connection = connection;
 	}

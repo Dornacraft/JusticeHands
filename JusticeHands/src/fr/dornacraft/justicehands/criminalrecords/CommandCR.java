@@ -14,6 +14,8 @@ import fr.dornacraft.justicehands.criminalrecords.invmanager.InventoryBuilderCR;
 
 public class CommandCR implements CommandExecutor {
 
+	//TODO A changer en utilisant le plugin
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender.hasPermission("justicehands.cr")) {

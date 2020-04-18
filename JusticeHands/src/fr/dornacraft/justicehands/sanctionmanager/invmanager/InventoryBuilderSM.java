@@ -15,13 +15,12 @@ import fr.dornacraft.justicehands.GeneralUtils;
 import fr.dornacraft.justicehands.Main;
 import fr.dornacraft.justicehands.sanctionmanager.objects.Categorie;
 
-//LE BON!!!!!!!!!!!!!!!!!!//
 public class InventoryBuilderSM {
 	
 	// Ouverture de l'inventaire des catégories
 	public static void openMainMenu(Player moderator, UUID targetUUID, FileConfiguration config) {
-		// On récupère le joueur que veut modérer le modérateur.
-
+		
+		// Récupération des informations de la config du plugin
 		String mainMenuPath = "justicehands.sanctionmanager.MainMenu";
 		int menuLines = config.getInt(mainMenuPath + ".lines");
 		int targetHeadLine = config.getInt(mainMenuPath + ".playerhead-line");
@@ -29,6 +28,7 @@ public class InventoryBuilderSM {
 		System.out.println("line: "+ targetHeadLine);
 		System.out.println("colum: "+ targetHeadColum);
 
+		// Création de l'inventaire
 		InventoryManager inventoryManager = new InventoryManager(JavaPlugin.getPlugin(Main.class));
 		inventoryManager.init();
 
@@ -45,6 +45,8 @@ public class InventoryBuilderSM {
 
 	// Ouverture de l'inventaire des sanction de la catégorie voulue
 	public static void openCategoryMenu(Categorie categorie, Player moderator, Player target) {
+		
+		// Création de l'inventaire
 		InventoryManager inventoryManager = new InventoryManager(JavaPlugin.getPlugin(Main.class));
 		inventoryManager.init();
 

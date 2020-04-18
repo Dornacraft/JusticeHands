@@ -23,13 +23,16 @@ public class Main extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
+		// Connexion à la base de données
 		sql = new SqlConnection("jdbc:mysql://","localhost","dornacraft","root","");
 		sql.connection();
 		
+		//On donne la connection
 		sqlPA = new SqlPlayerAccount(sql.getConnection());
 		sqlSM = new SqlSanctionManager(sql.getConnection());
 		sqlKK = new SqlKeysKeeper(sql.getConnection());
 		
+		// On active commandes et listeners
 		activeCommands();
 		activeListeners();
 		
@@ -39,6 +42,7 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
+		// Déconnection del a base de données
 		sql.disconnect();
 	}
 

@@ -11,8 +11,19 @@ import fr.dornacraft.justicehands.sanctionmanager.objects.Sanction;
 
 public class SanctionsAlgo {
 
-	// Mute (en minutes) = points*1
-	// Ban (en jours) = points/10
+	/*
+	 * Echelle de sanctions: Points <-> Temps :
+	 * 
+	 * Mute (en minutes) = points*1
+	 * Ban (en jours) = points/10
+	 * 
+	 * Cette algorithme va gérer la création de la sanction par rapport aux
+	 * ancienne sanction du joueur mais aussi par rapport à son nombre de points actuel
+	 * 
+	 * TODO, il va falloire créer le systeme qui permet de perdre 1 points tous les jours (par exemple), le 
+	 * joueur perdra des points succéssivement chaque jours si il est sage et qu'il ne fait
+	 * aucune violation du réglèment. (Permet de se racheter)
+	 */
 
 	public static void generateSanction(Sanction sanction, Player moderator, Player target) {
 		

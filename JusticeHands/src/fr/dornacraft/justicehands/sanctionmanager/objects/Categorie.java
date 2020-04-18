@@ -10,6 +10,7 @@ public class Categorie {
 	private int categoryLineSlot;
 	private int categoryColumSlot;
 	
+	// Constructeur vide
 	public Categorie() {
 	}
 	

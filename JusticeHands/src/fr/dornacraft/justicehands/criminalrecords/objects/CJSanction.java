@@ -4,6 +4,12 @@ import java.sql.Timestamp;
 
 import org.bukkit.entity.Player;
 
+/*
+ *  Cet objet est une sanction provenant du casier judiciaire du joueur,
+ *  il a donc plus d'informations qu'une sanction provenant de la configuration
+ *  du plugin (fichier : config.yml)
+ */
+
 public class CJSanction {
 	private String sanctionName;
 	private String sanctionReason;
@@ -111,6 +117,7 @@ public class CJSanction {
 				"},{sanctionID=" + this.sanctionID +
 				"},{sanctionTS=" + this.sanctionTS +
 				"},{sanctionETS=" + this.sanctionETS +
-				"},{sanctionPlayer" + this.sanctionPlayer + "}]";
+				"},{sanctionPlayer" + this.sanctionPlayer +
+				"},{sanctionState" + this.sanctionState + "}]";
 	}
 }

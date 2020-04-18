@@ -71,6 +71,7 @@ public class CategoriesList {
 		}
 	}
 	
+	// Retourne la liste des catégories, mais du coup aussi la liste des sanctions de chaque catégorie
 	public static ArrayList<Categorie> getCategoriesList() {
 		return categoriesList;
 	}

@@ -8,12 +8,15 @@ import java.util.UUID;
 
 public class SqlPlayerAccount {
 
+	//Méthodes permettant de récupérer des informations sur le compte du joueur (par exemple le nombre de points)
 	private Connection connection;
 	
+	// Constructeur
 	public SqlPlayerAccount(Connection connection) {
 		this.connection = connection;
 	}
 
+	// Création d'un compte
 	public void createAccount(UUID playerUUID) {
 		if (!hasAccount(playerUUID)) {
 			try {
@@ -29,6 +32,7 @@ public class SqlPlayerAccount {
 		
 	}
 
+	// Vérification d'un compte déjà existant
 	public boolean hasAccount(UUID playerUUID) {
 		try {
 			PreparedStatement q = connection.prepareStatement("SELECT uuid FROM players_points WHERE uuid = ?");
@@ -43,6 +47,7 @@ public class SqlPlayerAccount {
 		return false;
 	}
 
+	// Récupération du compte
 	public UUID getAccount(UUID playerUUID) {
 		try {
 			PreparedStatement q = connection.prepareStatement("SELECT uuid FROM players_points WHERE uuid = ?");
@@ -59,6 +64,7 @@ public class SqlPlayerAccount {
 		
 	}
 
+	// Récupération du nombre de points du joueur
 	public int getPoints(UUID playerUUID) {
 		try {
 			PreparedStatement q = connection.prepareStatement("SELECT points FROM players_points WHERE uuid = ?");
@@ -80,7 +86,8 @@ public class SqlPlayerAccount {
 		return 0;
 	}
 	
+	// Actualisation du nombre de point du joueur
 	public void setPoints(UUID playerUUID) {
-		
+		//TODO
 	}
 }

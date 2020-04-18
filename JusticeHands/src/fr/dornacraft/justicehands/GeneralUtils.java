@@ -12,6 +12,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+// Ici va se trouveer toutes les méthodes qui vont pouvoir être utiles n'importe où
+// dans le code du plugin, comme des outils généraux.
+
 public class GeneralUtils {
 	private final static String CRPrefix = "§7[§6CriminalRecords§7] §r";
 	private final static String MTPrefix = "§7[§cModeratorTools§7] §r";
@@ -47,6 +50,7 @@ public class GeneralUtils {
 		return targetHead;
 	}
 	
+	// Retourne l'objet de la page précédente
 	public static ItemStack pagePrécedente() {
 		ItemStack item = new ItemStack(Material.ARROW);
 		ItemMeta meta = item.getItemMeta();
@@ -56,6 +60,7 @@ public class GeneralUtils {
 		return item;
 	}
 
+	// Retourne l'objet de la page suivante
 	public static ItemStack pageSuivante() {
 		ItemStack item = new ItemStack(Material.ARROW);
 		ItemMeta meta = item.getItemMeta();
@@ -65,6 +70,7 @@ public class GeneralUtils {
 		return item;
 	}
 	
+	// Retourne l'objet indiquant que le casier judiciaire du joueur est vide (all sanctions)
 	public static ItemStack emptyCR() {
 		ItemStack item = new ItemStack(Material.BARRIER);
 		ItemMeta meta = item.getItemMeta();
@@ -74,6 +80,7 @@ public class GeneralUtils {
 		return item;
 	}
 	
+	// Retourne l'objet indiquant que le joueur n'a jamais eu un certain type de sanction
 	public static ItemStack emptyTypeCR() {
 		ItemStack item = new ItemStack(Material.BARRIER);
 		ItemMeta meta = item.getItemMeta();
@@ -83,6 +90,7 @@ public class GeneralUtils {
 		return item;
 	}
 	
+	// Retourne l'objet indiquant qu'une catégorie ne contient aucune sanction
 	public static ItemStack emptySM() {
 		ItemStack item = new ItemStack(Material.BARRIER);
 		ItemMeta meta = item.getItemMeta();
@@ -92,6 +100,7 @@ public class GeneralUtils {
 		return item;
 	}
 	
+	// Permet de transformer des true et false en oui et non (respectivement)
 	private static String getState(boolean b) {
 		String state;
 		if (b)
@@ -101,6 +110,7 @@ public class GeneralUtils {
 		return state;
 	}
 	
+	// Récupère le préfix de chaque partie du plugin via les initiales
 	public static String getPrefix(String prefix) {
 		if (prefix.equalsIgnoreCase("cr")) {
 			return CRPrefix;
@@ -117,6 +127,8 @@ public class GeneralUtils {
 		return "[Inexistant] §r";
 	}
 	
+	// Méthode permettant de récupèrer une différence de temps et de la formater en String 
+	// 		exemple: 1 mois, 12 jours, 13 heures, 56 secondes
 	public static String timeRemaining(long timeDifference) {
 		final long SECOND = 1000; // number of ms in a second
 		final long MINUTE = SECOND * 60; // number of ms in a minute

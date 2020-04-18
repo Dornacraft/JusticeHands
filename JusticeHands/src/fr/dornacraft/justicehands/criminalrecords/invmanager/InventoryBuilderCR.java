@@ -16,16 +16,16 @@ import fr.dornacraft.justicehands.Main;
 import fr.dornacraft.justicehands.criminalrecords.objects.CJSanction;
 
 public class InventoryBuilderCR {
-
-	// Ouverture de l'inventaire principale des sanctions
+	
+	// Création de l'inventaire affichant les sanctions d'un joueur:
 	public static void openMainMenu(Player player, UUID targetUUID) {
-		// On récupère le joueur que veut modérer le modérateur.
-		
+		// Joueur cible du modérateur
 		Player target = Bukkit.getPlayer(targetUUID);
 		
-		// On récupère la liste des sanctions du joueur
+		// Récupération de la liste des sanctions du joueur
 		List<CJSanction> playerAllSanctionList = Main.getSqlSM().getPlayerSanctions(player);
 		
+		// Création de l'inventaire
 		InventoryManager inventoryManger = new InventoryManager(JavaPlugin.getPlugin(Main.class));
 		inventoryManger.init();
 		

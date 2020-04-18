@@ -137,7 +137,7 @@ public class InventoryCR implements InventoryProvider {
 			}
 		}
 
-		// Création de la page si pas vide
+		// Création de la page si cette dernière n'est pas vide :
 		if (selectedSanctions.size() > 0) {
 			ClickableItem[] sanctions = new ClickableItem[selectedSanctions.size()];
 			for (int i = 0; i < sanctions.length; i++)
@@ -153,7 +153,10 @@ public class InventoryCR implements InventoryProvider {
 				contents.set(5, 8,ClickableItem.of(GeneralUtils.pageSuivante(),
 						e -> inventory.open(player, p.next().getPage())));
 			}
-		} else {
+		}
+		
+		// Si la page est vide, alors le signalé :
+		else {
 			if (!select.equals("all")) {
 				contents.set(3, 4, ClickableItem.empty(GeneralUtils.emptyTypeCR()));
 			} else {
@@ -161,14 +164,17 @@ public class InventoryCR implements InventoryProvider {
 			}
 		}
 		
-		// Compteur de sanctions
+		
+		// Compteur de sanctions en haut à droite de l'inventaire
 		ItemStack cptTotal = new ItemStack(Material.BLACK_BANNER, totalVisual); // noire
 		ItemMeta metaTotal = cptTotal.getItemMeta();
 		metaTotal.setDisplayName("§8Nombre total de sanctions du joueur: §7" + nbrTotal);
-		if (nbrTotalCanceled < 2) {
-			metaTotal.setLore(Arrays.asList("§8 dont §7" + nbrTotalCanceled + " annulée"));
-		} else {
-			metaTotal.setLore(Arrays.asList("§8 dont §7" + nbrTotalCanceled + " annulées"));
+		if (nbrTotalCanceled > 0) {
+			if (nbrTotalCanceled < 2) {
+				metaTotal.setLore(Arrays.asList("§8 dont §7" + nbrTotalCanceled + " annulée"));
+			} else {
+				metaTotal.setLore(Arrays.asList("§8 dont §7" + nbrTotalCanceled + " annulées"));
+			}
 		}
 		cptTotal.setItemMeta(metaTotal);
 		contents.set(0, 8, ClickableItem.of(cptTotal, e -> {
@@ -179,14 +185,16 @@ public class InventoryCR implements InventoryProvider {
 			}
 		}));
 		
-		// Compteur de bannissements
+		// Compteur de bannissements en haut à droite
 		ItemStack cptBans = new ItemStack(Material.ORANGE_BANNER, bansVisual); // jaune
 		ItemMeta metaBans = cptBans.getItemMeta();
 		metaBans.setDisplayName("§6Nombre total de bannissements du joueur: §e" + nbrBans);
-		if (nbrBansCanceled < 2) {
-			metaBans.setLore(Arrays.asList("§6 dont §e" + nbrBansCanceled + " annulé"));
-		} else {
-			metaBans.setLore(Arrays.asList("§6 dont §e" + nbrBansCanceled + " annulés"));
+		if (nbrBansCanceled > 0) {
+			if (nbrBansCanceled < 2) {
+				metaBans.setLore(Arrays.asList("§6 dont §e" + nbrBansCanceled + " annulé"));
+			} else {
+				metaBans.setLore(Arrays.asList("§6 dont §e" + nbrBansCanceled + " annulés"));
+			}
 		}
 		cptBans.setItemMeta(metaBans);
 		contents.set(0, 7, ClickableItem.of(cptBans, e -> {
@@ -197,14 +205,16 @@ public class InventoryCR implements InventoryProvider {
 			}
 		}));
 		
-		// Compteur de mutes
+		// Compteur de mutes en haut à droite
 		ItemStack cptMutes = new ItemStack(Material.BLUE_BANNER, mutesVisual); // bleu
 		ItemMeta metaMutes = cptMutes.getItemMeta();
 		metaMutes.setDisplayName("§3Nombre total de mutes du joueur: §b" + nbrMutes);
-		if (nbrMutesCanceled < 2) {
-			metaMutes.setLore(Arrays.asList("§3 dont §b" + nbrMutesCanceled + " annulé"));
-		} else {
-			metaMutes.setLore(Arrays.asList("§3 dont §b" + nbrMutesCanceled + " annulés"));
+		if (nbrMutesCanceled > 0) {
+			if (nbrMutesCanceled < 2) {
+				metaMutes.setLore(Arrays.asList("§3 dont §b" + nbrMutesCanceled + " annulé"));
+			} else {
+				metaMutes.setLore(Arrays.asList("§3 dont §b" + nbrMutesCanceled + " annulés"));
+			}
 		}
 		cptMutes.setItemMeta(metaMutes);
 		contents.set(0, 6, ClickableItem.of(cptMutes, e -> {
@@ -215,14 +225,16 @@ public class InventoryCR implements InventoryProvider {
 			}
 		}));
 		
-		// Compteur de kick
+		// Compteur de kick en haut à droite
 		ItemStack cptKicks = new ItemStack(Material.GREEN_BANNER, kicksVisual); // vert
 		ItemMeta metaKicks = cptKicks.getItemMeta();
 		metaKicks.setDisplayName("§2Nombre total de kicks du joueur: §a" + nbrKicks);
-		if (nbrKicksCanceled < 2) {
-			metaKicks.setLore(Arrays.asList("§2 dont §a" + nbrKicksCanceled + " annulé"));
-		} else {
-			metaKicks.setLore(Arrays.asList("§2 dont §a" + nbrKicksCanceled + " annulés"));
+		if (nbrKicksCanceled > 0) {
+			if (nbrKicksCanceled < 2) {
+				metaKicks.setLore(Arrays.asList("§2 dont §a" + nbrKicksCanceled + " annulé"));
+			} else {
+				metaKicks.setLore(Arrays.asList("§2 dont §a" + nbrKicksCanceled + " annulés"));
+			}
 		}
 		cptKicks.setItemMeta(metaKicks);
 		contents.set(0, 5, ClickableItem.of(cptKicks, e -> {
@@ -236,9 +248,11 @@ public class InventoryCR implements InventoryProvider {
 
 	@Override 
 	public void update(Player player, InventoryContents contents) {
-		// NOTHING
+		// TODO L'animation avec les trois couleurs de bannissement pour le compteur en haut à droite
 	}
 	
+	
+	// Création de l'item servant à afficher une sanction
 	private static ItemStack getSanctionItem(CJSanction sanction) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		ItemStack item = new ItemStack(Material.CLAY);

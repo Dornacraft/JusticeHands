@@ -15,6 +15,10 @@ import fr.dornacraft.justicehands.sanctionmanager.invmanager.InventoryBuilderSM;
 
 public class CommandSM implements CommandExecutor {
 
+	
+	/*
+	 * TODO, a remplacer en utilisant le plugin permettant de mieux optimiser les commandes
+	 */
 	private FileConfiguration config;
 
 	public CommandSM(FileConfiguration config) {

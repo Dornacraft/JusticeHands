@@ -6,9 +6,10 @@ public class Sanction implements Cloneable{
 	private int sanctionPoints;
 	private String sanctionType;
 	
+	// Constructeur vide
 	public Sanction() {
-		
 	}
+	
 	// Clone une sanction
 	@Override 
 	public Object clone() {

@@ -27,6 +27,7 @@ import fr.dornacraft.justicehands.sanctionmanager.objects.Sanction;
 public class CategoryInventorySM implements InventoryProvider {
 	private Categorie currentCategorie;
 	
+	// Constructeur
 	public CategoryInventorySM(Categorie currentCategorie) {
 		this.currentCategorie = currentCategorie;
 	}
@@ -54,14 +55,13 @@ public class CategoryInventorySM implements InventoryProvider {
 			}));
 		}
 		
-		// Création de la page si pas vide
+		// Création de la page si cette dernière n'est pas vide
 		if (currentCategorie.getSanctionsList().size() > 0) {
 			ClickableItem[] sanctions = new ClickableItem[currentCategorie.getSanctionsList().size()];
 			Pagination p = contents.pagination();
 			
 			for (int i = 0; i < sanctions.length; i++) {
 				Sanction sanction = currentCategorie.getSanctionsList().get(i);
-				//Création d'un ClickableItem à partir de la méthode getSantionItem...
 				sanctions[i] = ClickableItem.of(getSanctionItem(sanction), e -> {
 					if (e.isLeftClick()) {
 						if (moderator.hasPermission("justicehands.sm." + sanction.getInitialType().toLowerCase())) {
@@ -77,7 +77,6 @@ public class CategoryInventorySM implements InventoryProvider {
 			p.setItems(sanctions);
 			p.setItemsPerPage(27);
 			p.addToIterator(contents.newIterator(SlotIterator.Type.HORIZONTAL, 2, 0));
-			//Je me retrouve ici avec un inventaire vide et je comprend pas pourquoi mdr..
 			
 			if (!p.isFirst()) {
 				contents.set(5, 0, ClickableItem.of(GeneralUtils.pagePrécedente(), e -> inventory.open(moderator, p.previous().getPage())));
@@ -85,14 +84,17 @@ public class CategoryInventorySM implements InventoryProvider {
 			if (!p.isLast() && sanctions.length > 27) {
 				contents.set(5, 8, ClickableItem.of(GeneralUtils.pageSuivante(), e -> inventory.open(moderator, p.next().getPage())));
 			}
-		} else {
+		}
+		
+		// Si la page est vide, alors on le signale
+		else {
 			contents.set(3, 4, ClickableItem.empty(GeneralUtils.emptySM()));
 		}
 	}
 
 	@Override
 	public void update(Player moderator, InventoryContents contents) {
-		// NOTHING
+		// NOTHING TO DO
 	}
 
 	// Récupère l'item représentatif d'une catégorie:
@@ -105,6 +107,7 @@ public class CategoryInventorySM implements InventoryProvider {
 		return item;
 	}
 	
+	// Récupère l'item représentatif d'une sanction:
 	private static ItemStack getSanctionItem(Sanction sanction) {
 		ItemStack item = new ItemStack(Material.GLOBE_BANNER_PATTERN, 1);
 		ItemMeta meta = item.getItemMeta();

@@ -11,8 +11,10 @@ import org.bukkit.entity.Player;
 
 public class SqlKeysKeeper {
 
+	//Englobe toutes les méthodes en lien avec KeysKepper et la base de données
 	private Connection connection;
 
+	// Constructeur
 	public SqlKeysKeeper(Connection connection) {
 		this.connection = connection;
 	}

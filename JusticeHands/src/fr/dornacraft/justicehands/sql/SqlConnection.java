@@ -6,9 +6,11 @@ import java.sql.SQLException;
 
 public class SqlConnection {
 
+	//Connexion et déconnexion de la base de données du serveur
 	private Connection connection;
 	private String urlbase, host, database, user, pass;
 
+	// Constructeur
 	public SqlConnection(String urlbase, String host, String database, String user, String pass) {
 		this.urlbase = urlbase;
 		this.host = host;

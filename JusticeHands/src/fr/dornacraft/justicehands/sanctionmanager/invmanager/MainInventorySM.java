@@ -44,10 +44,10 @@ public class MainInventorySM implements InventoryProvider {
 
 	@Override
 	public void update(Player player, InventoryContents contents) {
-		// NOTHING
+		// NOTHING TO DO
 	}
 
-	// Récupère l'item représentatif d'une catégorie:
+	// Récupèration de l'item représentatif d'une catégorie
 	private static ItemStack getCategoryItem(Categorie categorie) {
 		ItemStack item = new ItemStack(Material.CHEST);
 		ItemMeta meta = item.getItemMeta();

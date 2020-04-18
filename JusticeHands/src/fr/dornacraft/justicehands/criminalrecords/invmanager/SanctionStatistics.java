@@ -17,7 +17,8 @@ import fr.dornacraft.justicehands.criminalrecords.objects.CJSanction;
 public class SanctionStatistics {
 
 	public static ItemStack getPlayerStatistics(List<CJSanction> playerAllSanctionList, Player target) {
-		// Les sanctions sont classées de la plus récentes à la plus ancienne
+		// Lors de la requête SQL, les sanctions sont classées de la plus récente à la plus ancienne
+		
 		List<CJSanction> activeSanctionList = new ArrayList<CJSanction>();
 		List<CJSanction> bansList = new ArrayList<CJSanction>();
 		List<CJSanction> mutesList = new ArrayList<CJSanction>();
@@ -26,13 +27,15 @@ public class SanctionStatistics {
 		// Tri des sanctions
 		if (playerAllSanctionList.size() > 0) {
 			for (CJSanction sanction : playerAllSanctionList) {
-				// Type : ban, bandef, risingToBan
 				if (!(sanction.getState().equals("cancel") || sanction.getState().equals("delete"))) {
+						// Type : ban, bandef, risingban
 					if (sanction.getInitialType().contains("ban")) {
 						bansList.add(sanction);
-					} else if (sanction.getInitialType().contains("mute")) {
+						// Type : mute
+					} else if (sanction.getInitialType().equals("mute")) {
 						mutesList.add(sanction);
-					} else if (sanction.getInitialType().contains("kick")) {
+						// Type : kick
+					} else if (sanction.getInitialType().equals("kick")) {
 						kicksList.add(sanction);
 					}
 					activeSanctionList.add(sanction);
@@ -40,7 +43,7 @@ public class SanctionStatistics {
 			}
 		}
 
-		// Récupération du nombre de sanction :
+		// Récupération du nombre de sanction de chaque type en utilisant les listes
 		double nbrSanction = activeSanctionList.size();
 		double nbrBans = bansList.size();
 		double nbrMutes = mutesList.size();
@@ -49,19 +52,19 @@ public class SanctionStatistics {
 		// Ajout d'un pourcentage selon les sanctions
 		DecimalFormat df = new DecimalFormat("#.##");
 		String prcBan; 
-		if (nbrBans>0)
+		if (nbrBans > 0)
 			prcBan = df.format(nbrBans * 100 / nbrSanction);
 		else
 			prcBan = "0";
 		
 		String prcMute;
-		if (nbrMutes>0)
+		if (nbrMutes > 0)
 			prcMute = df.format(nbrMutes * 100 / nbrSanction);
 		else
 			prcMute = "0";
 		
 		String prcKick;
-		if (nbrKicks>0)
+		if (nbrKicks > 0)
 			prcKick = df.format(nbrKicks * 100 / nbrSanction);
 		else
 			prcKick = "0";
@@ -69,7 +72,7 @@ public class SanctionStatistics {
 		// Format de date et heure
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-		// Derniere sanction
+		// Derniere sanction (Valeurs par défaut)
 		String lastSanctionID = "§7§oInexistant";
 		String lastSanctionDate = "§7§oInexistante";
 		String lastSanctionType = "§7§oInexistant";
@@ -81,7 +84,7 @@ public class SanctionStatistics {
 			lastSanctionType = (SanctionType.getType(lastSanction.getInitialType()).getVisualColor() + SanctionType.getType(lastSanction.getInitialType()).getVisualName());
 		}
 
-		// Récupération premiere et dernière sanction de chaque type
+		// Récupération premiere et dernière sanction de chaque type (Valeurs par défaut)
 		String firstBanDate = "Aucun", firstMuteDate = "Aucun", firstKickDate = "Aucun";
 		String lastBanDate = "Aucun", lastMuteDate = "Aucun", lastKickDate = "Aucun";
 		String firstBanID = "-", firstMuteID = "-", firstKickID = "-";
@@ -111,15 +114,16 @@ public class SanctionStatistics {
 			lastKickID = kicksList.get(kicksList.size() - 1).getID();
 		}
 
-		// Point actuel du joueur
+		// Récupération des points actuel du joueur
 		int playerActualPoints = Main.getSqlPA().getPoints(target.getUniqueId());
 
-		// Total des points obtenus
+		// Total des points obtenus depuis sa première connexion sur le serveur
 		int playerAllPoints = 0;
 		for (CJSanction sanction : playerAllSanctionList) {
 			playerAllPoints += sanction.getPoints();
 		}
 
+		// Création de l'item servant à afficher les statistiques du joueur en question
 		ItemStack stats = new ItemStack(Material.KNOWLEDGE_BOOK);
 		ItemMeta infos = stats.getItemMeta();
 		infos.setDisplayName("§c§lStatistiques du joueur §7" + target.getName() + " §c§l:");
